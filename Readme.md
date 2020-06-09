@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
 * Студент: [Evgeniy Alishevets](https://up.htmlacademy.ru/react/4/user/194706).
-* Наставник: `Неизвестно`.
+* Наставник: `Без наставника`.
 
 ---
 
