@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App renders correctly 1`] = `
+exports[`App component renders correctly 1`] = `
 Array [
   <div
     style={
@@ -205,7 +205,7 @@ Array [
             <b
               className="places__found"
             >
-              10
+              312
                places to stay in Amsterdam
             </b>
             <form
@@ -267,6 +267,8 @@ Array [
             >
               <article
                 className="cities__place-card place-card"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
               >
                 <div
                   className="place-card__mark"

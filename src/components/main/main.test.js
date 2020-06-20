@@ -2,9 +2,9 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import Main from './main.jsx';
 
-it(`Correctly renders main`, () => {
-  const rentCount = 10;
-  const rentOptions = [{
+it(`Main page correctly renders`, () => {
+  const offersCount = 10;
+  const offers = [{
     id: 1,
     title: `Appartment listing`,
     type: `Apartment`,
@@ -17,8 +17,8 @@ it(`Correctly renders main`, () => {
   const tree = renderer
     .create(
         <Main
-          rentCount={rentCount}
-          rentOptions={rentOptions}
+          offersCount={offersCount}
+          offers={offers}
           onCardTitleClick={() => {}}
         />
     )

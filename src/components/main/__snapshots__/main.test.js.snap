@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Correctly renders main 1`] = `
+exports[`Main page correctly renders 1`] = `
 Array [
   <div
     style={
@@ -267,6 +267,8 @@ Array [
             >
               <article
                 className="cities__place-card place-card"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
               >
                 <div
                   className="place-card__mark"
