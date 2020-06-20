@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 
-const Main = ({rentCount, rentOptions}) => {
+const Main = ({rentCount, rentOptions, onCardTitleClick}) => {
   return (
     <Fragment>
       <div style={{display: `none`}}>
@@ -80,7 +80,7 @@ const Main = ({rentCount, rentOptions}) => {
                   <span className="places__sorting-type" tabIndex="0">
                     Popular
                     <svg className="places__sorting-arrow" width="7" height="4">
-                      <use xlinkHref="#icon-arrow-select"></use>
+                      <use xlinkHref="#icon-arrow-select" />
                     </svg>
                   </span>
                   <ul className="places__options places__options--custom places__options--opened">
@@ -114,7 +114,7 @@ const Main = ({rentCount, rentOptions}) => {
                               </div>
                               <button className="place-card__bookmark-button button" type="button">
                                 <svg className="place-card__bookmark-icon" width="18" height="19">
-                                  <use xlinkHref="#icon-bookmark"></use>
+                                  <use xlinkHref="#icon-bookmark" />
                                 </svg>
                                 <span className="visually-hidden">To bookmarks</span>
                               </button>
@@ -125,7 +125,7 @@ const Main = ({rentCount, rentOptions}) => {
                                 <span className="visually-hidden">Rating</span>
                               </div>
                             </div>
-                            <h2 className="place-card__name">
+                            <h2 className="place-card__name" onClick={onCardTitleClick}>
                               <a href="#">{card.title}</a>
                             </h2>
                             <p className="place-card__type">{card.type}</p>
@@ -162,6 +162,7 @@ Main.propTypes = {
         imgSrc: PropTypes.string.isRequired
       })
   ).isRequired,
+  onCardTitleClick: PropTypes.func.isRequired
 };
 
 export default Main;

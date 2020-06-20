@@ -2,11 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Main from '../main/main.jsx';
 
+const cardTitleClickHandler = () => {};
+
 const App = ({rentCount, rentOptions}) => {
   return (
     <Main
       rentCount={rentCount}
       rentOptions={rentOptions}
+      onCardTitleClick={cardTitleClickHandler}
     />
   );
 };
@@ -23,7 +26,7 @@ App.propTypes = {
         isPremium: PropTypes.bool.isRequired,
         imgSrc: PropTypes.string.isRequired
       })
-  ).isRequired,
+  ).isRequired
 };
 
 export default App;
