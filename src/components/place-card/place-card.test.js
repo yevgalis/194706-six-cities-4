@@ -1,10 +1,9 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import App from './app.jsx';
+import PlaceCard from './place-card.jsx';
 
-it(`App component renders correctly`, () => {
-  const offersCount = 312;
-  const offers = [{
+it(`PlaceCard component renders correctly`, () => {
+  const offer = {
     id: 1,
     title: `Appartment listing`,
     type: `Apartment`,
@@ -12,13 +11,14 @@ it(`App component renders correctly`, () => {
     rating: `100%`,
     isPremium: true,
     imgSrc: `img/apartment-01.jpg`
-  }];
+  };
 
   const tree = renderer
     .create(
-        <App
-          offersCount={offersCount}
-          offers={offers}
+        <PlaceCard
+          offer={offer}
+          onCardTitleClick={() => {}}
+          onCardHover={() => {}}
         />
     )
     .toJSON();

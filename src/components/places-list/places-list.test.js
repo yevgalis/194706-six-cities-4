@@ -1,9 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import App from './app.jsx';
+import PlacesList from './places-list.jsx';
 
-it(`App component renders correctly`, () => {
-  const offersCount = 312;
+it(`PlacesList component renders correctly`, () => {
   const offers = [{
     id: 1,
     title: `Appartment listing`,
@@ -16,9 +15,9 @@ it(`App component renders correctly`, () => {
 
   const tree = renderer
     .create(
-        <App
-          offersCount={offersCount}
+        <PlacesList
           offers={offers}
+          onCardTitleClick={() => {}}
         />
     )
     .toJSON();
