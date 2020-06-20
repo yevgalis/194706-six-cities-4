@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 
-const Main = ({rentCount, rentOptions, onCardTitleClick}) => {
+const Main = ({offersCount, offers, onCardTitleClick}) => {
   return (
     <Fragment>
       <div style={{display: `none`}}>
@@ -74,7 +74,7 @@ const Main = ({rentCount, rentOptions, onCardTitleClick}) => {
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{rentCount} places to stay in Amsterdam</b>
+                <b className="places__found">{offersCount} places to stay in Amsterdam</b>
                 <form className="places__sorting" action="#" method="get">
                   <span className="places__sorting-caption">Sort by</span>
                   <span className="places__sorting-type" tabIndex="0">
@@ -92,7 +92,7 @@ const Main = ({rentCount, rentOptions, onCardTitleClick}) => {
                 </form>
                 <div className="cities__places-list places__list tabs__content">
                   {
-                    rentOptions.map((card) => {
+                    offers.map((card) => {
                       return (
                         <article className="cities__place-card place-card" key={card.id}>
                           {
@@ -150,8 +150,8 @@ const Main = ({rentCount, rentOptions, onCardTitleClick}) => {
 };
 
 Main.propTypes = {
-  rentCount: PropTypes.number.isRequired,
-  rentOptions: PropTypes.arrayOf(
+  offersCount: PropTypes.number.isRequired,
+  offers: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,

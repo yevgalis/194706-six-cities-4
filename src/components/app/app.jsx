@@ -4,19 +4,19 @@ import Main from '../main/main.jsx';
 
 const cardTitleClickHandler = () => {};
 
-const App = ({rentCount, rentOptions}) => {
+const App = ({offersCount, offers}) => {
   return (
     <Main
-      rentCount={rentCount}
-      rentOptions={rentOptions}
+      offersCount={offersCount}
+      offers={offers}
       onCardTitleClick={cardTitleClickHandler}
     />
   );
 };
 
 App.propTypes = {
-  rentCount: PropTypes.number.isRequired,
-  rentOptions: PropTypes.arrayOf(
+  offersCount: PropTypes.number.isRequired,
+  offers: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
