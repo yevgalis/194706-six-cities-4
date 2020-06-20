@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
-import PlaceCard from '../place-card/place-card.jsx';
+import PlacesList from '../places-list/places-list.jsx';
 
 const Main = ({offersCount, offers, onCardTitleClick}) => {
   return (
@@ -91,19 +91,10 @@ const Main = ({offersCount, offers, onCardTitleClick}) => {
                     <li className="places__option" tabIndex="0">Top rated first</li>
                   </ul>
                 </form>
-                <div className="cities__places-list places__list tabs__content">
-                  {
-                    offers.map((offer) => {
-                      return (
-                        <PlaceCard
-                          key={offer.id}
-                          offer={offer}
-                          onCardTitleClick={onCardTitleClick}
-                        />
-                      );
-                    })
-                  }
-                </div>
+                <PlacesList
+                  offers={offers}
+                  onCardTitleClick={onCardTitleClick}
+                />
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map"></section>
