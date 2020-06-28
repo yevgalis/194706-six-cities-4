@@ -358,7 +358,8 @@ Array [
                     onClick={[Function]}
                   >
                     <a
-                      href="#"
+                      href="/offer/1"
+                      onClick={[Function]}
                     >
                       Appartment listing
                     </a>

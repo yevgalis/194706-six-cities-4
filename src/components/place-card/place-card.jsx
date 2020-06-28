@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 const PlaceCard = ({offer, onCardTitleClick, onCardHover}) => {
   const {id, title, type, price, rating, isPremium, imgSrc} = offer;
@@ -10,6 +11,10 @@ const PlaceCard = ({offer, onCardTitleClick, onCardHover}) => {
 
   const onCardMouseLeave = () => {
     onCardHover(null);
+  };
+
+  const onOfferTitleClick = () => {
+    onCardTitleClick(id);
   };
 
   return (
@@ -48,8 +53,8 @@ const PlaceCard = ({offer, onCardTitleClick, onCardHover}) => {
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <h2 className="place-card__name" onClick={onCardTitleClick}>
-          <a href="#">{title}</a>
+        <h2 className="place-card__name" onClick={onOfferTitleClick}>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -62,9 +67,12 @@ PlaceCard.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    capacity: PropTypes.number.isRequired,
     price: PropTypes.number.isRequired,
     rating: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired,
+    features: PropTypes.array.isRequired,
     imgSrc: PropTypes.string.isRequired,
     coordinates: PropTypes.arrayOf(
         PropTypes.number.isRequired

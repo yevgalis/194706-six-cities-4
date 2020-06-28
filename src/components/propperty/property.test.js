@@ -1,8 +1,9 @@
 import React from 'react';
+import {BrowserRouter} from 'react-router-dom';
 import renderer from 'react-test-renderer';
-import Map from './map.jsx';
+import Property from './property.jsx';
 
-it(`Map renders correctly`, () => {
+it(`Property details component renders correctly`, () => {
   const offers = [{
     id: 1,
     title: `Appartment listing`,
@@ -19,7 +20,9 @@ it(`Map renders correctly`, () => {
 
   const tree = renderer
     .create(
-        <Map offers={offers} />, {
+        <BrowserRouter>
+          <Property offers={offers} />
+        </BrowserRouter>, {
           createNodeMock: () => document.createElement(`div`)
         }
     )
