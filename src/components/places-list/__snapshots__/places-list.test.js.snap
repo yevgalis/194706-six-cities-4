@@ -97,7 +97,8 @@ exports[`PlacesList component renders correctly 1`] = `
         onClick={[Function]}
       >
         <a
-          href="#"
+          href="/offer/1"
+          onClick={[Function]}
         >
           Appartment listing
         </a>
