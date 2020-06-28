@@ -79,9 +79,12 @@ Map.propTypes = {
         price: PropTypes.number.isRequired,
         rating: PropTypes.string.isRequired,
         isPremium: PropTypes.bool.isRequired,
-        imgSrc: PropTypes.string.isRequired
+        imgSrc: PropTypes.string.isRequired,
+        coordinates: PropTypes.arrayOf(
+            PropTypes.number.isRequired
+        )
       })
-  ).isRequired,
+  ).isRequired
 };
 
 export default Map;

@@ -11,7 +11,8 @@ it(`App component renders correctly`, () => {
     price: 110,
     rating: `100%`,
     isPremium: true,
-    imgSrc: `img/apartment-01.jpg`
+    imgSrc: `img/apartment-01.jpg`,
+    coordinates: [52.3709553943508, 4.89309666406198]
   }];
 
   const tree = renderer
@@ -19,7 +20,9 @@ it(`App component renders correctly`, () => {
         <App
           offersCount={offersCount}
           offers={offers}
-        />
+        />, {
+          createNodeMock: () => document.createElement(`div`)
+        }
     )
     .toJSON();
 

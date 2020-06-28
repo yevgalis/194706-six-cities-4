@@ -1,9 +1,9 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import PlaceCard from './place-card.jsx';
+import Map from './map.jsx';
 
-it(`PlaceCard component renders correctly`, () => {
-  const offer = {
+it(`Map renders correctly`, () => {
+  const offers = [{
     id: 1,
     title: `Appartment listing`,
     type: `Apartment`,
@@ -12,15 +12,12 @@ it(`PlaceCard component renders correctly`, () => {
     isPremium: true,
     imgSrc: `img/apartment-01.jpg`,
     coordinates: [52.3709553943508, 4.89309666406198]
-  };
+  }];
 
   const tree = renderer
     .create(
-        <PlaceCard
-          offer={offer}
-          onCardTitleClick={() => {}}
-          onCardHover={() => {}}
-        />
+        <Map offers={offers} />,
+        {createNodeMock: () => document.createElement(`div`)}
     )
     .toJSON();
 
