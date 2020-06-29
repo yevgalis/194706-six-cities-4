@@ -37,7 +37,7 @@ class App extends PureComponent {
           {this._renderApp}
         </Route>
         <Route path="/dev">
-          <Property />
+          <Property offers={offers} />
         </Route>
         <Route path="/offer/:id">
           <Property offers={offers} />
