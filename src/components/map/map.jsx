@@ -32,9 +32,10 @@ class Map extends PureComponent {
       .addTo(map);
   }
 
-  _addMarker(coordinates, map) {
+  _addMarker(coordinates, map, isActive = false) {
+    const url = isActive ? `/img/pin-active.svg` : `/img/pin.svg`;
     const icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
+      iconUrl: url,
       iconSize: [30, 30]
     });
 
@@ -44,12 +45,15 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const {offers} = this.props;
+    const {offers, activeCard} = this.props;
     const mapContainer = this._mapRef.current;
     const map = this._initMap(mapContainer);
 
     this._addLayer(map);
-    offers.forEach((offer) => this._addMarker(offer.coordinates, map));
+    offers.forEach((offer) => {
+      const isActive = offer.id === activeCard;
+      this._addMarker(offer.coordinates, map, isActive);
+    });
   }
 
   componentWillUnmount() {
@@ -58,17 +62,25 @@ class Map extends PureComponent {
   }
 
   render() {
+    const mapStyle = this.props.type === `cities`
+      ? {width: `100%`, height: `100%`}
+      : {width: `1144px`, height: `100%`, margin: `0 auto`};
+
     return (
-      <section className="cities__map">
+      <section className={`${this.props.type}__map map`}>
         <div
           ref={this._mapRef}
           id="map"
-          style={{width: `100%`, height: `100%`}}
+          style={mapStyle}
         />
       </section>
     );
   }
 }
+
+Map.defaultProps = {
+  activeCard: null
+};
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(
@@ -81,13 +93,16 @@ Map.propTypes = {
         price: PropTypes.number.isRequired,
         rating: PropTypes.string.isRequired,
         isPremium: PropTypes.bool.isRequired,
+        isBookmarked: PropTypes.bool.isRequired,
         features: PropTypes.array.isRequired,
         imgSrc: PropTypes.string.isRequired,
         coordinates: PropTypes.arrayOf(
             PropTypes.number.isRequired
         ),
       })
-  ).isRequired
+  ).isRequired,
+  activeCard: PropTypes.number,
+  type: PropTypes.string.isRequired
 };
 
 export default Map;

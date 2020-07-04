@@ -1,10 +1,9 @@
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import renderer from 'react-test-renderer';
-import Main from './main.jsx';
+import NearPlacesList from './near-places-list.jsx';
 
-it(`Main page correctly renders`, () => {
-  const offersCount = 10;
+it(`NearPlacesList component renders correctly`, () => {
   const offers = [{
     id: 1,
     title: `Appartment listing`,
@@ -23,16 +22,12 @@ it(`Main page correctly renders`, () => {
   const tree = renderer
     .create(
         <BrowserRouter>
-          <Main
-            offersCount={offersCount}
+          <NearPlacesList
             offers={offers}
             onCardTitleClick={() => {}}
             onCardHover={() => {}}
-            hoveredCard={1}
           />
-        </BrowserRouter>, {
-          createNodeMock: () => document.createElement(`div`)
-        }
+        </BrowserRouter>
     )
     .toJSON();
 

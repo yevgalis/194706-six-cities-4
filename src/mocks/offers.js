@@ -8,8 +8,9 @@ export default [
     price: 120,
     rating: `80%`,
     isPremium: true,
+    isBookmarked: false,
     features: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitchen`, `Dishwasher`, `Cabel TV`, `Fridge`],
-    imgSrc: `img/apartment-01.jpg`,
+    imgSrc: `/img/apartment-01.jpg`,
     coordinates: [52.3909553943508, 4.85309666406198]
   },
   {
@@ -21,8 +22,9 @@ export default [
     price: 80,
     rating: `80%`,
     isPremium: false,
+    isBookmarked: true,
     features: [`Wi-Fi`, `Towels`, `Heating`, `Cabel TV`, `Fridge`],
-    imgSrc: `img/room.jpg`,
+    imgSrc: `/img/room.jpg`,
     coordinates: [52.369553943508, 4.85309666406198]
   },
   {
@@ -34,8 +36,9 @@ export default [
     price: 132,
     rating: `80%`,
     isPremium: false,
+    isBookmarked: false,
     features: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Baby seat`, `Kitchen`, `Cabel TV`, `Fridge`],
-    imgSrc: `img/apartment-02.jpg`,
+    imgSrc: `/img/apartment-02.jpg`,
     coordinates: [52.3909553943508, 4.929309666406198]
   },
   {
@@ -47,8 +50,9 @@ export default [
     price: 180,
     rating: `100%`,
     isPremium: true,
+    isBookmarked: false,
     features: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitchen`, `Dishwasher`, `Cabel TV`, `Fridge`],
-    imgSrc: `img/apartment-03.jpg`,
+    imgSrc: `/img/apartment-03.jpg`,
     coordinates: [52.3809553943508, 4.939309666406198]
   }
 ];

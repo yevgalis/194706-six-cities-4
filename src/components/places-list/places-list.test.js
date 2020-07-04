@@ -13,6 +13,7 @@ it(`PlacesList component renders correctly`, () => {
     price: 110,
     rating: `100%`,
     isPremium: true,
+    isBookmarked: false,
     features: [`Wi-Fi`, `Towels`, `Heating`, `Cabel TV`, `Fridge`],
     imgSrc: `img/apartment-01.jpg`,
     coordinates: [52.3709553943508, 4.89309666406198]
@@ -24,6 +25,7 @@ it(`PlacesList component renders correctly`, () => {
           <PlacesList
             offers={offers}
             onCardTitleClick={() => {}}
+            onCardHover={() => {}}
           />
         </BrowserRouter>
     )

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import PlacesList from '../places-list/places-list.jsx';
 import Map from '../map/map.jsx';
 
-const Main = ({offersCount, offers, onCardTitleClick}) => {
+const Main = ({offersCount, offers, onCardHover, onCardTitleClick, hoveredCard}) => {
   return (
     <Fragment>
       <div style={{display: `none`}}>
@@ -95,19 +95,26 @@ const Main = ({offersCount, offers, onCardTitleClick}) => {
                 <PlacesList
                   offers={offers}
                   onCardTitleClick={onCardTitleClick}
+                  onCardHover={onCardHover}
                 />
               </section>
               <div className="cities__right-section">
-                <Map offers={offers} />
+                <Map
+                  offers={offers}
+                  activeCard={hoveredCard}
+                  type={`cities`}
+                />
               </div>
             </div>
           </div>
         </main>
       </div>
-
-
     </Fragment>
   );
+};
+
+Main.defaultProps = {
+  hoveredCard: null
 };
 
 Main.propTypes = {
@@ -122,6 +129,7 @@ Main.propTypes = {
         price: PropTypes.number.isRequired,
         rating: PropTypes.string.isRequired,
         isPremium: PropTypes.bool.isRequired,
+        isBookmarked: PropTypes.bool.isRequired,
         features: PropTypes.array.isRequired,
         imgSrc: PropTypes.string.isRequired,
         coordinates: PropTypes.arrayOf(
@@ -129,7 +137,9 @@ Main.propTypes = {
         ),
       })
   ).isRequired,
-  onCardTitleClick: PropTypes.func.isRequired
+  onCardTitleClick: PropTypes.func.isRequired,
+  onCardHover: PropTypes.func.isRequired,
+  hoveredCard: PropTypes.number
 };
 
 export default Main;
