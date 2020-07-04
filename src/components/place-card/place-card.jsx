@@ -44,7 +44,7 @@ const PlaceCard = ({offer, cardType, onCardTitleClick, onCardHover}) => {
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark" />
             </svg>
-            <span className="visually-hidden">{isBookmarked ? `In ` : `To `}bookmarks</span>
+            <span className="visually-hidden">{isBookmarked ? `In bookmarks` : `To bookmarks`}</span>
           </button>
         </div>
         <div className="place-card__rating rating">

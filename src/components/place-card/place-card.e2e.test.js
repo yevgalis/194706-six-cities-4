@@ -17,6 +17,7 @@ describe(`Test events on PlaceCard component`, () => {
     price: 110,
     rating: `100%`,
     isPremium: true,
+    isBookmarked: false,
     features: [`Wi-Fi`, `Towels`, `Heating`, `Cabel TV`, `Fridge`],
     imgSrc: `img/apartment-01.jpg`,
     coordinates: [52.3709553943508, 4.89309666406198]
@@ -28,6 +29,7 @@ describe(`Test events on PlaceCard component`, () => {
     const card = shallow(
         <PlaceCard
           offer={offer}
+          cardType={`cities`}
           onCardTitleClick={onCardTitleClick}
           onCardHover={onCardHover}
         />
@@ -43,6 +45,7 @@ describe(`Test events on PlaceCard component`, () => {
     const card = shallow(
         <PlaceCard
           offer={offer}
+          cardType={`cities`}
           onCardTitleClick={onCardTitleClick}
           onCardHover={onCardHover}
         />
