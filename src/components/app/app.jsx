@@ -8,23 +8,35 @@ class App extends PureComponent {
   constructor(props) {
     super(props);
 
+    this.state = {
+      hoveredCard: null
+    };
+
     this._renderApp = this._renderApp.bind(this);
-    this.cardTitleClickHandler = this.cardTitleClickHandler.bind(this);
+    this._handleCardHover = this._handleCardHover.bind(this);
+    this._cardTitleClickHandler = this._cardTitleClickHandler.bind(this);
   }
 
   _renderApp() {
+    const {hoveredCard} = this.state;
     const {offersCount, offers} = this.props;
 
     return (
       <Main
         offersCount={offersCount}
         offers={offers}
-        onCardTitleClick={this.cardTitleClickHandler}
+        onCardHover={this._handleCardHover}
+        onCardTitleClick={this._cardTitleClickHandler}
+        hoveredCard={hoveredCard}
       />
     );
   }
 
-  cardTitleClickHandler() {
+  _handleCardHover(id) {
+    this.setState({hoveredCard: id});
+  }
+
+  _cardTitleClickHandler() {
     return {};
   }
 
@@ -37,10 +49,18 @@ class App extends PureComponent {
           {this._renderApp}
         </Route>
         <Route path="/dev">
-          <Property offers={offers} />
+          <Property
+            offers={offers}
+            onCardTitleClick={this._cardTitleClickHandler}
+            onCardHover={this._handleCardHover}
+          />
         </Route>
         <Route path="/offer/:id">
-          <Property offers={offers} />
+          <Property
+            offers={offers}
+            onCardTitleClick={this._cardTitleClickHandler}
+            onCardHover={this._handleCardHover}
+          />
         </Route>
       </Switch>
     );
@@ -59,6 +79,7 @@ App.propTypes = {
         price: PropTypes.number.isRequired,
         rating: PropTypes.string.isRequired,
         isPremium: PropTypes.bool.isRequired,
+        isBookmarked: PropTypes.bool.isRequired,
         features: PropTypes.array.isRequired,
         imgSrc: PropTypes.string.isRequired,
         coordinates: PropTypes.arrayOf(

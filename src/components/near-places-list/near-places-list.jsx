@@ -2,27 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PlaceCard from '../place-card/place-card.jsx';
 
-const PlacesList = ({offers, onCardTitleClick, onCardHover}) => {
+const NearPlacesList = ({offers, onCardTitleClick, onCardHover}) => {
   return (
-    <div className="cities__places-list places__list tabs__content">
-      {
-        offers.map((offer) => {
-          return (
-            <PlaceCard
-              key={offer.id}
-              offer={offer}
-              cardType={`cities`}
-              onCardTitleClick={onCardTitleClick}
-              onCardHover={onCardHover}
-            />
-          );
-        })
-      }
-    </div>
+    <section className="near-places places">
+      <h2 className="near-places__title">Other places in the neighbourhood</h2>
+      <div className="near-places__list places__list">
+        {
+          offers.map((offer) => {
+            return (
+              <PlaceCard
+                key={offer.id}
+                offer={offer}
+                cardType={`near-places`}
+                onCardTitleClick={onCardTitleClick}
+                onCardHover={onCardHover}
+              />
+            );
+          })
+        }
+      </div>
+    </section>
   );
 };
 
-PlacesList.propTypes = {
+NearPlacesList.propTypes = {
   offers: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -45,4 +48,4 @@ PlacesList.propTypes = {
   onCardHover: PropTypes.func.isRequired
 };
 
-export default PlacesList;
+export default NearPlacesList;
