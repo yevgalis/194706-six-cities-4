@@ -118,7 +118,7 @@ Array [
               className="locations__item"
             >
               <a
-                className="locations__item-link tabs__item"
+                className="locations__item-link tabs__item "
                 href="#"
               >
                 <span>
@@ -130,7 +130,7 @@ Array [
               className="locations__item"
             >
               <a
-                className="locations__item-link tabs__item"
+                className="locations__item-link tabs__item "
                 href="#"
               >
                 <span>
@@ -142,7 +142,7 @@ Array [
               className="locations__item"
             >
               <a
-                className="locations__item-link tabs__item"
+                className="locations__item-link tabs__item "
                 href="#"
               >
                 <span>
@@ -155,6 +155,7 @@ Array [
             >
               <a
                 className="locations__item-link tabs__item tabs__item--active"
+                href="#"
               >
                 <span>
                   Amsterdam
@@ -165,7 +166,7 @@ Array [
               className="locations__item"
             >
               <a
-                className="locations__item-link tabs__item"
+                className="locations__item-link tabs__item "
                 href="#"
               >
                 <span>
@@ -177,7 +178,7 @@ Array [
               className="locations__item"
             >
               <a
-                className="locations__item-link tabs__item"
+                className="locations__item-link tabs__item "
                 href="#"
               >
                 <span>
