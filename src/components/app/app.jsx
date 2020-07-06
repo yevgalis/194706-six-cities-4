@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import {Switch, Route} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import Main from '../main/main.jsx';
 import Property from '../propperty/property.jsx';
 
@@ -89,4 +90,9 @@ App.propTypes = {
   ).isRequired
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+});
+
+export {App};
+export default connect(mapStateToProps)(App);
