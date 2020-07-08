@@ -14,8 +14,8 @@ class App extends PureComponent {
     };
 
     this._renderApp = this._renderApp.bind(this);
-    this._handleCardHover = this._handleCardHover.bind(this);
     this._cardTitleClickHandler = this._cardTitleClickHandler.bind(this);
+    this._cardHoverHandler = this._cardHoverHandler.bind(this);
   }
 
   _renderApp() {
@@ -26,14 +26,14 @@ class App extends PureComponent {
       <Main
         offersCount={offersCount}
         offers={offers}
-        onCardHover={this._handleCardHover}
-        onCardTitleClick={this._cardTitleClickHandler}
         hoveredCard={hoveredCard}
+        onCardHover={this._cardHoverHandler}
+        onCardTitleClick={this._cardTitleClickHandler}
       />
     );
   }
 
-  _handleCardHover(id) {
+  _cardHoverHandler(id) {
     this.setState({hoveredCard: id});
   }
 
@@ -53,14 +53,14 @@ class App extends PureComponent {
           <Property
             offers={offers}
             onCardTitleClick={this._cardTitleClickHandler}
-            onCardHover={this._handleCardHover}
+            onCardHover={this._cardHoverHandler}
           />
         </Route>
         <Route path="/offer/:id">
           <Property
             offers={offers}
             onCardTitleClick={this._cardTitleClickHandler}
-            onCardHover={this._handleCardHover}
+            onCardHover={this._cardHoverHandler}
           />
         </Route>
       </Switch>

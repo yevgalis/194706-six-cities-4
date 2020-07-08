@@ -26,9 +26,9 @@ it(`Main page correctly renders`, () => {
           <Main
             offersCount={offersCount}
             offers={offers}
+            hoveredCard={1}
             onCardTitleClick={() => {}}
             onCardHover={() => {}}
-            hoveredCard={1}
           />
         </BrowserRouter>, {
           createNodeMock: () => document.createElement(`div`)

@@ -1,10 +1,11 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import LocationsList from '../locations-list/locations-list.jsx';
+import PlacesSorting from '../places-sorting/places-sorting.jsx';
 import PlacesList from '../places-list/places-list.jsx';
 import Map from '../map/map.jsx';
 
-const Main = ({offersCount, offers, onCardHover, onCardTitleClick, hoveredCard}) => {
+const Main = ({offersCount, offers, hoveredCard, onCardHover, onCardTitleClick}) => {
   return (
     <Fragment>
       <div style={{display: `none`}}>
@@ -54,21 +55,7 @@ const Main = ({offersCount, offers, onCardHover, onCardTitleClick, hoveredCard})
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
                   <b className="places__found">{offersCount} places to stay in Amsterdam</b>
-                  <form className="places__sorting" action="#" method="get">
-                    <span className="places__sorting-caption">Sort by</span>
-                    <span className="places__sorting-type" tabIndex="0">
-                      Popular
-                      <svg className="places__sorting-arrow" width="7" height="4">
-                        <use xlinkHref="#icon-arrow-select" />
-                      </svg>
-                    </span>
-                    <ul className="places__options places__options--custom places__options--opened">
-                      <li className="places__option places__option--active" tabIndex="0">Popular</li>
-                      <li className="places__option" tabIndex="0">Price: low to high</li>
-                      <li className="places__option" tabIndex="0">Price: high to low</li>
-                      <li className="places__option" tabIndex="0">Top rated first</li>
-                    </ul>
-                  </form>
+                  <PlacesSorting />
                   <PlacesList
                     offers={offers}
                     onCardTitleClick={onCardTitleClick}
@@ -77,9 +64,9 @@ const Main = ({offersCount, offers, onCardHover, onCardTitleClick, hoveredCard})
                 </section>
                 <div className="cities__right-section">
                   <Map
+                    type={`cities`}
                     offers={offers}
                     activeCard={hoveredCard}
-                    type={`cities`}
                   />
                 </div>
               </div>
@@ -129,9 +116,9 @@ Main.propTypes = {
         ),
       })
   ).isRequired,
+  hoveredCard: PropTypes.number,
   onCardTitleClick: PropTypes.func.isRequired,
   onCardHover: PropTypes.func.isRequired,
-  hoveredCard: PropTypes.number
 };
 
 export default Main;
