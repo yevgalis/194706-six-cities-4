@@ -4,8 +4,10 @@ import CitiesList from '../cities-list/cities-list.jsx';
 import PlacesSorting from '../places-sorting/places-sorting.jsx';
 import PlacesList from '../places-list/places-list.jsx';
 import Map from '../map/map.jsx';
+import NoOffers from '../no-offers/no-offers.jsx';
+import cities from '../../mocks/cities';
 
-const Main = ({offersCount, offers, hoveredCard, onCardHover, onCardTitleClick}) => {
+const Main = ({offers, hoveredCard, onCardHover}) => {
   return (
     <Fragment>
       <div style={{display: `none`}}>
@@ -38,27 +40,17 @@ const Main = ({offersCount, offers, hoveredCard, onCardHover, onCardTitleClick})
 
         <main className="page__main page__main--index">
           <h1 className="visually-hidden">Cities</h1>
-          <CitiesList
-            cities={[
-              `Paris`,
-              `Cologne`,
-              `Brussels`,
-              `Amsterdam`,
-              `Hamburg`,
-              `Dusseldorf`,
-            ]}
-          />
-          <div className="cities">
-            {
-              offers.length > 0 &&
+          <CitiesList cities={cities} />
+          {
+            offers.length > 0 &&
+            <div className="cities">
               <div className="cities__places-container container">
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
-                  <b className="places__found">{offersCount} places to stay in Amsterdam</b>
+                  <b className="places__found">{offers.length} places to stay in Amsterdam</b>
                   <PlacesSorting />
                   <PlacesList
                     offers={offers}
-                    onCardTitleClick={onCardTitleClick}
                     onCardHover={onCardHover}
                   />
                 </section>
@@ -70,22 +62,9 @@ const Main = ({offersCount, offers, hoveredCard, onCardHover, onCardTitleClick})
                   />
                 </div>
               </div>
-            }
-            {
-              offers.length === 0 &&
-              <div className="cities">
-                <div className="cities__places-container cities__places-container--empty container">
-                  <section className="cities__no-places">
-                    <div className="cities__status-wrapper tabs__content">
-                      <b className="cities__status">No places to stay available</b>
-                      <p className="cities__status-description">We could not find any property availbale at the moment in Dusseldorf</p>
-                    </div>
-                  </section>
-                  <div className="cities__right-section"></div>
-                </div>
-              </div>
-            }
-          </div>
+            </div>
+          }
+          { offers.length === 0 && <NoOffers /> }
         </main>
       </div>
     </Fragment>
@@ -97,7 +76,6 @@ Main.defaultProps = {
 };
 
 Main.propTypes = {
-  offersCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -117,7 +95,6 @@ Main.propTypes = {
       })
   ).isRequired,
   hoveredCard: PropTypes.number,
-  onCardTitleClick: PropTypes.func.isRequired,
   onCardHover: PropTypes.func.isRequired,
 };
 

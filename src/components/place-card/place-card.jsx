@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
-const PlaceCard = ({offer, cardType, onCardTitleClick, onCardHover}) => {
+const PlaceCard = ({offer, cardType, onCardHover}) => {
   const {id, title, type, price, rating, isPremium, isBookmarked, imgSrc} = offer;
 
   const onCardMouseEnter = () => {
@@ -11,10 +11,6 @@ const PlaceCard = ({offer, cardType, onCardTitleClick, onCardHover}) => {
 
   const onCardMouseLeave = () => {
     onCardHover(null);
-  };
-
-  const onOfferTitleClick = () => {
-    onCardTitleClick(id);
   };
 
   return (
@@ -53,7 +49,7 @@ const PlaceCard = ({offer, cardType, onCardTitleClick, onCardHover}) => {
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <h2 className="place-card__name" onClick={onOfferTitleClick}>
+        <h2 className="place-card__name">
           <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
@@ -80,7 +76,6 @@ PlaceCard.propTypes = {
     )
   }).isRequired,
   cardType: PropTypes.string.isRequired,
-  onCardTitleClick: PropTypes.func.isRequired,
   onCardHover: PropTypes.func.isRequired
 };
 

@@ -1,14 +1,13 @@
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import renderer from 'react-test-renderer';
-import CitiesList from './cities-list.jsx';
-import cities from '../../mocks/test/cities';
+import NoOffers from './no-offers.jsx';
 
-it(`CitiesList component renders correctly`, () => {
+it(`NoOffers component renders correctly`, () => {
   const tree = renderer
     .create(
         <BrowserRouter>
-          <CitiesList cities={cities} />
+          <NoOffers />
         </BrowserRouter>
     )
     .toJSON();

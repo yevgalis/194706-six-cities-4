@@ -206,7 +206,7 @@ Array [
             <b
               className="places__found"
             >
-              10
+              1
                places to stay in Amsterdam
             </b>
             <form
@@ -356,7 +356,6 @@ Array [
                   </div>
                   <h2
                     className="place-card__name"
-                    onClick={[Function]}
                   >
                     <a
                       href="/offer/1"

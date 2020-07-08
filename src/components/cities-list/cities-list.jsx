@@ -26,7 +26,7 @@ const CitiesList = ({cities}) => {
 CitiesList.propTypes = {
   cities: PropTypes.arrayOf(
       PropTypes.string.isRequired
-  ).isRequired,
+  ).isRequired
 };
 
 export default CitiesList;

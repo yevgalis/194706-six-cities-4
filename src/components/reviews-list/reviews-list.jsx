@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Review from '../review/review.jsx';
 
-const ReviewsList = (props) => {
-  const {reviews} = props;
+const ReviewsList = ({reviews}) => {
   const reviewsQuantity = reviews.length;
 
   return (
@@ -84,7 +83,7 @@ ReviewsList.propTypes = {
         text: PropTypes.string.isRequired,
         datetime: PropTypes.string.isRequired
       }).isRequired
-  ).isRequired,
+  ).isRequired
 };
 
 export default ReviewsList;

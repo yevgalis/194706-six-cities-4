@@ -4,9 +4,7 @@ import PlacesSorting from './places-sorting.jsx';
 
 it(`PlacesSorting component renders correctly`, () => {
   const tree = renderer
-    .create(
-        <PlacesSorting />
-    )
+    .create(<PlacesSorting />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

@@ -1,4 +1,5 @@
-import {extend} from './utils';
+import {ActionTypes} from '../actions';
+import {extend} from '../../utils/common';
 
 const initialState = {
   city: `Amsterdam`,
@@ -62,22 +63,6 @@ const initialState = {
   ]
 };
 
-const ActionTypes = {
-  CHANGE_CITY: `CHANGE_CITY`,
-  GET_OFFERS: `GET_OFFERS`
-};
-
-const ActionCreator = {
-  changeCity: (city) => ({
-    type: ActionTypes.CHANGE_CITY,
-    payload: city
-  }),
-  getOffers: () => ({
-    type: ActionTypes.GET_OFFERS,
-    payload: null
-  })
-};
-
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.CHANGE_CITY:
@@ -93,4 +78,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {reducer, ActionTypes, ActionCreator};
+export {reducer};

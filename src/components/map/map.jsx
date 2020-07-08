@@ -70,8 +70,7 @@ class Map extends PureComponent {
   }
 
   componentWillUnmount() {
-    const mapContainer = this._mapRef.current;
-    mapContainer.remove();
+    this._map.remove();
   }
 
   render() {

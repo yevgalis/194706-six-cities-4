@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PlaceCard from '../place-card/place-card.jsx';
 
-const NearPlacesList = ({offers, onCardTitleClick, onCardHover}) => {
+const NearPlacesList = ({offers}) => {
   return (
     <section className="near-places places">
       <h2 className="near-places__title">Other places in the neighbourhood</h2>
@@ -14,8 +14,7 @@ const NearPlacesList = ({offers, onCardTitleClick, onCardHover}) => {
                 key={offer.id}
                 offer={offer}
                 cardType={`near-places`}
-                onCardTitleClick={onCardTitleClick}
-                onCardHover={onCardHover}
+                onCardHover={() => {}}
               />
             );
           })
@@ -41,11 +40,9 @@ NearPlacesList.propTypes = {
         imgSrc: PropTypes.string.isRequired,
         coordinates: PropTypes.arrayOf(
             PropTypes.number.isRequired
-        ),
+        )
       })
-  ).isRequired,
-  onCardTitleClick: PropTypes.func.isRequired,
-  onCardHover: PropTypes.func.isRequired
+  ).isRequired
 };
 
 export default NearPlacesList;

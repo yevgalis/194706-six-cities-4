@@ -102,7 +102,6 @@ exports[`NearPlacesList component renders correctly 1`] = `
         </div>
         <h2
           className="place-card__name"
-          onClick={[Function]}
         >
           <a
             href="/offer/1"

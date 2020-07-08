@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PlaceCard from '../place-card/place-card.jsx';
 
-const PlacesList = ({offers, onCardTitleClick, onCardHover}) => {
+const PlacesList = ({offers, onCardHover}) => {
   return (
     <div className="cities__places-list places__list tabs__content">
       {
@@ -12,7 +12,6 @@ const PlacesList = ({offers, onCardTitleClick, onCardHover}) => {
               key={offer.id}
               offer={offer}
               cardType={`cities`}
-              onCardTitleClick={onCardTitleClick}
               onCardHover={onCardHover}
             />
           );
@@ -38,10 +37,9 @@ PlacesList.propTypes = {
         imgSrc: PropTypes.string.isRequired,
         coordinates: PropTypes.arrayOf(
             PropTypes.number.isRequired
-        ),
+        )
       })
   ).isRequired,
-  onCardTitleClick: PropTypes.func.isRequired,
   onCardHover: PropTypes.func.isRequired
 };
 
