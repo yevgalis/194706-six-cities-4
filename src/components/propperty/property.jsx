@@ -6,7 +6,7 @@ import Map from '../map/map.jsx';
 import NearPlacesList from '../near-places-list/near-places-list.jsx';
 import reviews from '../../mocks/reviews';
 
-const Property = ({offers, onCardTitleClick, onCardHover, match}) => {
+const Property = ({offers, onCardTitleClick, match}) => {
   const _getCurrentOfferData = () => {
     const id = parseInt(match.params.id, 10) || 1;
     const offer = offers.find((offerObj) => offerObj.id === id);
@@ -148,16 +148,16 @@ const Property = ({offers, onCardTitleClick, onCardHover, match}) => {
               </div>
             </div>
             <Map
+              type={`property`}
               offers={offers}
               activeCard={offer.id}
-              type={`property`}
             />
           </section>
           <div className="container">
             <NearPlacesList
               offers={offers.filter((it) => it.id !== offer.id)}
               onCardTitleClick={onCardTitleClick}
-              onCardHover={onCardHover}
+              onCardHover={() => {}}
             />
           </div>
         </main>

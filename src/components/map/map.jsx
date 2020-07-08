@@ -7,53 +7,66 @@ class Map extends PureComponent {
     super(props);
 
     this._mapRef = createRef();
+    this._map = null;
+    this._markers = [];
   }
 
-  _initMap(element) {
+  _initMap() {
+    const mapContainer = this._mapRef.current;
     const city = [52.38333, 4.9];
     const zoom = 12;
-    const map = leaflet.map(element, {
+
+    this._map = leaflet.map(mapContainer, {
       zoom,
       center: city,
       zoomControl: false,
       marker: true
     });
-
-    map.setView(city, zoom);
-
-    return map;
+    this._map.setView(city, zoom);
   }
 
-  _addLayer(map) {
+  _addLayer() {
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
-      .addTo(map);
+      .addTo(this._map);
   }
 
-  _addMarker(coordinates, map, isActive = false) {
-    const url = isActive ? `/img/pin-active.svg` : `/img/pin.svg`;
-    const icon = leaflet.icon({
-      iconUrl: url,
-      iconSize: [30, 30]
-    });
+  _addMarkers() {
+    const {offers, activeCard} = this.props;
 
-    leaflet
-      .marker(coordinates, {icon})
-      .addTo(map);
+    offers.forEach((offer) => {
+      const url = offer.id === activeCard ? `/img/pin-active.svg` : `/img/pin.svg`;
+      const icon = leaflet.icon({
+        iconUrl: url,
+        iconSize: [30, 30]
+      });
+      const marker = leaflet
+        .marker(offer.coordinates, {icon})
+        .addTo(this._map);
+
+      this._markers.push(marker);
+    });
+  }
+
+  _removeMarkers() {
+    this._markers.forEach((marker) => {
+      this._map.removeLayer(marker);
+    });
   }
 
   componentDidMount() {
-    const {offers, activeCard} = this.props;
-    const mapContainer = this._mapRef.current;
-    const map = this._initMap(mapContainer);
+    this._initMap();
+    this._addLayer();
+    this._addMarkers();
+  }
 
-    this._addLayer(map);
-    offers.forEach((offer) => {
-      const isActive = offer.id === activeCard;
-      this._addMarker(offer.coordinates, map, isActive);
-    });
+  componentDidUpdate(prevProps) {
+    if (prevProps.activeCard !== this.props.activeCard) {
+      this._removeMarkers();
+      this._addMarkers();
+    }
   }
 
   componentWillUnmount() {
