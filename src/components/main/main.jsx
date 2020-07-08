@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
-import LocationsList from '../locations-list/locations-list.jsx';
+import CitiesList from '../cities-list/cities-list.jsx';
 import PlacesSorting from '../places-sorting/places-sorting.jsx';
 import PlacesList from '../places-list/places-list.jsx';
 import Map from '../map/map.jsx';
@@ -38,8 +38,8 @@ const Main = ({offersCount, offers, hoveredCard, onCardHover, onCardTitleClick})
 
         <main className="page__main page__main--index">
           <h1 className="visually-hidden">Cities</h1>
-          <LocationsList
-            locations={[
+          <CitiesList
+            cities={[
               `Paris`,
               `Cologne`,
               `Brussels`,
