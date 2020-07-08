@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const LocationsList = ({locations}) => {
+const CitiesList = ({cities}) => {
   return (
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
           {
-            locations.map((location) => {
+            cities.map((city) => {
               return (
-                <li key={location} className="locations__item">
-                  <a className={`locations__item-link tabs__item ${location === `Amsterdam` ? `tabs__item--active` : ``}`} href="#">
-                    <span>{location}</span>
+                <li key={city} className="locations__item">
+                  <a className={`locations__item-link tabs__item ${city === `Amsterdam` ? `tabs__item--active` : ``}`} href="#">
+                    <span>{city}</span>
                   </a>
                 </li>
               );
@@ -23,10 +23,10 @@ const LocationsList = ({locations}) => {
   );
 };
 
-LocationsList.propTypes = {
-  locations: PropTypes.arrayOf(
+CitiesList.propTypes = {
+  cities: PropTypes.arrayOf(
       PropTypes.string.isRequired
   ).isRequired,
 };
 
-export default LocationsList;
+export default CitiesList;
