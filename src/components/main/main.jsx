@@ -1,13 +1,12 @@
 import React, {Fragment} from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import CitiesList from '../cities-list/cities-list.jsx';
 import PlacesSorting from '../places-sorting/places-sorting.jsx';
 import PlacesList from '../places-list/places-list.jsx';
 import Map from '../map/map.jsx';
 import NoOffers from '../no-offers/no-offers.jsx';
-import cities from '../../mocks/cities';
 
-const Main = ({offers, hoveredCard, onCardHover}) => {
+const Main = ({offers, cities, hoveredCard, onCardHover}) => {
   return (
     <Fragment>
       <div style={{display: `none`}}>
@@ -55,11 +54,11 @@ const Main = ({offers, hoveredCard, onCardHover}) => {
                   />
                 </section>
                 <div className="cities__right-section">
-                  <Map
+                  {/* <Map
                     type={`cities`}
                     offers={offers}
                     activeCard={hoveredCard}
-                  />
+                  /> */}
                 </div>
               </div>
             </div>
@@ -71,31 +70,31 @@ const Main = ({offers, hoveredCard, onCardHover}) => {
   );
 };
 
-Main.defaultProps = {
-  hoveredCard: null
-};
+// Main.defaultProps = {
+//   hoveredCard: null
+// };
 
-Main.propTypes = {
-  offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        bedrooms: PropTypes.number.isRequired,
-        capacity: PropTypes.number.isRequired,
-        price: PropTypes.number.isRequired,
-        rating: PropTypes.string.isRequired,
-        isPremium: PropTypes.bool.isRequired,
-        isBookmarked: PropTypes.bool.isRequired,
-        features: PropTypes.array.isRequired,
-        imgSrc: PropTypes.string.isRequired,
-        coordinates: PropTypes.arrayOf(
-            PropTypes.number.isRequired
-        ),
-      })
-  ).isRequired,
-  hoveredCard: PropTypes.number,
-  onCardHover: PropTypes.func.isRequired,
-};
+// Main.propTypes = {
+//   offers: PropTypes.arrayOf(
+//       PropTypes.shape({
+//         id: PropTypes.number.isRequired,
+//         title: PropTypes.string.isRequired,
+//         type: PropTypes.string.isRequired,
+//         bedrooms: PropTypes.number.isRequired,
+//         capacity: PropTypes.number.isRequired,
+//         price: PropTypes.number.isRequired,
+//         rating: PropTypes.string.isRequired,
+//         isPremium: PropTypes.bool.isRequired,
+//         isBookmarked: PropTypes.bool.isRequired,
+//         features: PropTypes.array.isRequired,
+//         imgSrc: PropTypes.string.isRequired,
+//         coordinates: PropTypes.arrayOf(
+//             PropTypes.number.isRequired
+//         ),
+//       })
+//   ).isRequired,
+//   hoveredCard: PropTypes.number,
+//   onCardHover: PropTypes.func.isRequired,
+// };
 
 export default Main;

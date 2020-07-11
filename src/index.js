@@ -1,17 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter} from 'react-router-dom';
-import {createStore} from 'redux';
-// import thunk from 'redux-thunk';
+import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
-// import createAPI from './api';
-import {reducer} from './redux/reducers/reducer';
+import {composeWithDevTools} from "redux-devtools-extension";
+import {createAPI} from './api';
+import reducer from './reducers/reducer';
+import {AsyncActions as DataAsyncActions} from './reducers/data/data';
+import {ActionCreator} from './reducers/user/user';
 import App from './components/app/app.jsx';
+
+const onUnauthorized = () => {
+  store.dispatch(ActionCreator.requireAuthorization(`NO_AUTH`));
+};
+
+const api = createAPI(onUnauthorized);
 
 const store = createStore(
     reducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    composeWithDevTools(
+        applyMiddleware(thunk.withExtraArgument(api))
+    )
 );
+
+store.dispatch(DataAsyncActions.loadOffers());
+// store.dispatch(UserOperation.checkAuth());
 
 ReactDOM.render(
     <React.StrictMode>

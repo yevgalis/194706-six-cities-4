@@ -24,6 +24,7 @@
     "eslint-plugin-react": "7.20.0",
     "jest": "26.0.1",
     "react-test-renderer": "16.13.1",
+    "redux-devtools-extension": "2.13.8",
     "stylelint": "13.6.0",
     "stylelint-config-htmlacademy": "0.1.4",
     "webpack": "4.43.0",
