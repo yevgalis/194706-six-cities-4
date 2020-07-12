@@ -1,14 +1,12 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import PlaceCard from '../place-card/place-card.jsx';
 
 const PlacesList = ({offers, onCardHover}) => {
-  const tempOffers = offers.slice(0, 20);
-
   return (
     <div className="cities__places-list places__list tabs__content">
       {
-        tempOffers.map((offer) => {
+        offers.map((offer) => {
           return (
             <PlaceCard
               key={offer.id}
@@ -23,26 +21,26 @@ const PlacesList = ({offers, onCardHover}) => {
   );
 };
 
-// PlacesList.propTypes = {
-//   offers: PropTypes.arrayOf(
-//       PropTypes.shape({
-//         id: PropTypes.number.isRequired,
-//         title: PropTypes.string.isRequired,
-//         type: PropTypes.string.isRequired,
-//         bedrooms: PropTypes.number.isRequired,
-//         capacity: PropTypes.number.isRequired,
-//         price: PropTypes.number.isRequired,
-//         rating: PropTypes.string.isRequired,
-//         isPremium: PropTypes.bool.isRequired,
-//         isBookmarked: PropTypes.bool.isRequired,
-//         features: PropTypes.array.isRequired,
-//         imgSrc: PropTypes.string.isRequired,
-//         coordinates: PropTypes.arrayOf(
-//             PropTypes.number.isRequired
-//         )
-//       })
-//   ).isRequired,
-//   onCardHover: PropTypes.func.isRequired
-// };
+PlacesList.propTypes = {
+  offers: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+        bedrooms: PropTypes.number.isRequired,
+        capacity: PropTypes.number.isRequired,
+        price: PropTypes.number.isRequired,
+        rating: PropTypes.string.isRequired,
+        isPremium: PropTypes.bool.isRequired,
+        isBookmarked: PropTypes.bool.isRequired,
+        features: PropTypes.array.isRequired,
+        imgSrc: PropTypes.string.isRequired,
+        coordinates: PropTypes.arrayOf(
+            PropTypes.number.isRequired
+        )
+      })
+  ).isRequired,
+  onCardHover: PropTypes.func.isRequired
+};
 
 export default PlacesList;

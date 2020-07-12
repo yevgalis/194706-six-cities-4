@@ -12,9 +12,10 @@ class Map extends PureComponent {
   }
 
   _initMap() {
+    const {city: {location}} = this.props;
     const mapContainer = this._mapRef.current;
-    const city = [52.38333, 4.9];
-    const zoom = 12;
+    const city = [location.latitude, location.longitude];
+    const zoom = location.zoom;
 
     this._map = leaflet.map(mapContainer, {
       zoom,
@@ -37,13 +38,16 @@ class Map extends PureComponent {
     const {offers, activeCard} = this.props;
 
     offers.forEach((offer) => {
+      const {location} = offer;
       const url = offer.id === activeCard ? `/img/pin-active.svg` : `/img/pin.svg`;
+      const coordinates = [location.latitude, location.longitude];
       const icon = leaflet.icon({
         iconUrl: url,
         iconSize: [30, 30]
       });
+
       const marker = leaflet
-        .marker(offer.coordinates, {icon})
+        .marker(coordinates, {icon})
         .addTo(this._map);
 
       this._markers.push(marker);
@@ -56,16 +60,29 @@ class Map extends PureComponent {
     });
   }
 
-  componentDidMount() {
+  _renderMap() {
     this._initMap();
     this._addLayer();
     this._addMarkers();
+  }
+
+  _removeMap() {
+    this._map.remove();
+  }
+
+  componentDidMount() {
+    this._renderMap();
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.activeCard !== this.props.activeCard) {
       this._removeMarkers();
       this._addMarkers();
+    }
+
+    if (prevProps.city.name !== this.props.city.name) {
+      this._removeMap();
+      this._renderMap();
     }
   }
 
@@ -113,6 +130,14 @@ Map.propTypes = {
         ),
       })
   ).isRequired,
+  city: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired
+    }).isRequired
+  }).isRequired,
   activeCard: PropTypes.number,
   type: PropTypes.string.isRequired
 };
