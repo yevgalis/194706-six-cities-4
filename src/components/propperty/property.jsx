@@ -1,20 +1,17 @@
 import React, {Fragment} from 'react';
-import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {withRouter} from 'react-router-dom';
 import ReviewsList from '../reviews-list/reviews-list.jsx';
 import Map from '../map/map.jsx';
 import NearPlacesList from '../near-places-list/near-places-list.jsx';
 import reviews from '../../mocks/reviews';
 
-const Property = ({offers, onCardTitleClick, match}) => {
-  const _getCurrentOfferData = () => {
-    const id = parseInt(match.params.id, 10) || 1;
-    const offer = offers.find((offerObj) => offerObj.id === id);
-
-    return offer;
-  };
-  const offer = _getCurrentOfferData();
-  const {title, type, bedrooms, capacity, price, rating, isPremium, features} = offer;
+const Property = (props) => {
+  const {offers} = props;
+  const currentID = parseInt(props.match.params.id, 10) || 1;
+  const currentOffer = offers.find((offer) => offer.id === currentID);
+  const nearbyOffers = offers.filter((offer) => offer.id !== currentID);
+  const {title, type, bedrooms, capacity, price, rating, isPremium, features} = currentOffer;
 
   return (
     <Fragment>
@@ -150,15 +147,11 @@ const Property = ({offers, onCardTitleClick, match}) => {
             <Map
               type={`property`}
               offers={offers}
-              activeCard={offer.id}
+              activeCard={currentID}
             />
           </section>
           <div className="container">
-            <NearPlacesList
-              offers={offers.filter((it) => it.id !== offer.id)}
-              onCardTitleClick={onCardTitleClick}
-              onCardHover={() => {}}
-            />
+            <NearPlacesList offers={nearbyOffers} />
           </div>
         </main>
       </div>
@@ -168,25 +161,8 @@ const Property = ({offers, onCardTitleClick, match}) => {
 
 Property.propTypes = {
   offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        bedrooms: PropTypes.number.isRequired,
-        capacity: PropTypes.number.isRequired,
-        price: PropTypes.number.isRequired,
-        rating: PropTypes.string.isRequired,
-        isPremium: PropTypes.bool.isRequired,
-        isBookmarked: PropTypes.bool.isRequired,
-        features: PropTypes.array.isRequired,
-        imgSrc: PropTypes.string.isRequired,
-        coordinates: PropTypes.arrayOf(
-            PropTypes.number.isRequired
-        ),
-      })
+      PropTypes.object.isRequired
   ).isRequired,
-  onCardTitleClick: PropTypes.func.isRequired,
-  onCardHover: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string

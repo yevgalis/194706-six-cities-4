@@ -2,6 +2,9 @@ import React, {PureComponent, createRef} from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 
+// TODO :: check leaflet methods for reseting map
+// TODO :: reduce render count
+
 class Map extends PureComponent {
   constructor(props) {
     super(props);
@@ -12,9 +15,10 @@ class Map extends PureComponent {
   }
 
   _initMap() {
+    const {city: {location}} = this.props;
     const mapContainer = this._mapRef.current;
-    const city = [52.38333, 4.9];
-    const zoom = 12;
+    const city = [location.latitude, location.longitude];
+    const zoom = location.zoom;
 
     this._map = leaflet.map(mapContainer, {
       zoom,
@@ -37,13 +41,16 @@ class Map extends PureComponent {
     const {offers, activeCard} = this.props;
 
     offers.forEach((offer) => {
+      const {location} = offer;
       const url = offer.id === activeCard ? `/img/pin-active.svg` : `/img/pin.svg`;
+      const coordinates = [location.latitude, location.longitude];
       const icon = leaflet.icon({
         iconUrl: url,
         iconSize: [30, 30]
       });
+
       const marker = leaflet
-        .marker(offer.coordinates, {icon})
+        .marker(coordinates, {icon})
         .addTo(this._map);
 
       this._markers.push(marker);
@@ -67,11 +74,20 @@ class Map extends PureComponent {
       this._removeMarkers();
       this._addMarkers();
     }
+
+    if (prevProps.city.name !== this.props.city.name) {
+      const {city: {location}} = this.props;
+      const city = [location.latitude, location.longitude];
+      const zoom = location.zoom;
+
+      this._removeMarkers();
+      this._map.setView(city, zoom);
+      this._addMarkers();
+    }
   }
 
   componentWillUnmount() {
-    const mapContainer = this._mapRef.current;
-    mapContainer.remove();
+    this._map.remove();
   }
 
   render() {
@@ -97,23 +113,16 @@ Map.defaultProps = {
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        bedrooms: PropTypes.number.isRequired,
-        capacity: PropTypes.number.isRequired,
-        price: PropTypes.number.isRequired,
-        rating: PropTypes.string.isRequired,
-        isPremium: PropTypes.bool.isRequired,
-        isBookmarked: PropTypes.bool.isRequired,
-        features: PropTypes.array.isRequired,
-        imgSrc: PropTypes.string.isRequired,
-        coordinates: PropTypes.arrayOf(
-            PropTypes.number.isRequired
-        ),
-      })
+      PropTypes.object.isRequired
   ).isRequired,
+  city: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired
+    }).isRequired
+  }).isRequired,
   activeCard: PropTypes.number,
   type: PropTypes.string.isRequired
 };
