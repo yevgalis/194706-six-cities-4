@@ -29,22 +29,16 @@ class Main extends PureComponent {
   _sortOffers(value) {
     const {offers} = this.props;
 
-    if (value === `Price: low to high`) {
-      offers.sort((a, b) => {
-        return a.price - b.price;
-      });
-    }
-
-    if (value === `Price: high to low`) {
-      offers.sort((a, b) => {
-        return b.price - a.price;
-      });
-    }
-
-    if (value === `Top rated first`) {
-      offers.sort((a, b) => {
-        return b.rating - a.rating;
-      });
+    switch (value) {
+      case `Price: low to high`:
+        offers.sort((a, b) => a.price - b.price);
+        break;
+      case `Price: high to low`:
+        offers.sort((a, b) => b.price - a.price);
+        break;
+      case `Top rated first`:
+        offers.sort((a, b) => b.rating - a.rating);
+        break;
     }
   }
 
@@ -96,7 +90,9 @@ class Main extends PureComponent {
                   <section className="cities__places places">
                     <h2 className="visually-hidden">Places</h2>
                     <b className="places__found">{offers.length} places to stay in {selectedCity.name}</b>
-                    <PlacesSorting onSortOptionClick={this._sortOffers} />
+                    <PlacesSorting
+                      onSortOptionClick={this._sortOffers}
+                    />
                     <PlacesList
                       offers={offers}
                       onCardHover={this._cardHoverHandler}
@@ -144,22 +140,7 @@ Main.propTypes = {
     }).isRequired
   }).isRequired,
   offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        bedrooms: PropTypes.number.isRequired,
-        capacity: PropTypes.number.isRequired,
-        price: PropTypes.number.isRequired,
-        rating: PropTypes.string.isRequired,
-        isPremium: PropTypes.bool.isRequired,
-        isBookmarked: PropTypes.bool.isRequired,
-        features: PropTypes.array.isRequired,
-        imgSrc: PropTypes.string.isRequired,
-        coordinates: PropTypes.arrayOf(
-            PropTypes.number.isRequired
-        )
-      })
+      PropTypes.object.isRequired
   ).isRequired,
   onCityTitleClick: PropTypes.func.isRequired
 };

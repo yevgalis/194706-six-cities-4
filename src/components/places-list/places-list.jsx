@@ -23,22 +23,7 @@ const PlacesList = ({offers, onCardHover}) => {
 
 PlacesList.propTypes = {
   offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        bedrooms: PropTypes.number.isRequired,
-        capacity: PropTypes.number.isRequired,
-        price: PropTypes.number.isRequired,
-        rating: PropTypes.string.isRequired,
-        isPremium: PropTypes.bool.isRequired,
-        isBookmarked: PropTypes.bool.isRequired,
-        features: PropTypes.array.isRequired,
-        imgSrc: PropTypes.string.isRequired,
-        coordinates: PropTypes.arrayOf(
-            PropTypes.number.isRequired
-        )
-      })
+      PropTypes.object.isRequired
   ).isRequired,
   onCardHover: PropTypes.func.isRequired
 };

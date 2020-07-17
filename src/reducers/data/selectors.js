@@ -18,7 +18,7 @@ export const getCities = createSelector(
         return acc;
       }, []);
 
-      return filtered.slice(0, 6);
+      return filtered;
     }
 );
 

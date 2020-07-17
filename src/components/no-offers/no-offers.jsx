@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// FIXME - main picture isn't displayed
+
 const NoOffers = ({city = ``}) => {
   return (
     <div className="cities">

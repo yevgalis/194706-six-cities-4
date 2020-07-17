@@ -2,6 +2,9 @@ import React, {PureComponent, createRef} from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 
+// TODO :: check leaflet methods for reseting map
+// TODO :: reduce render count
+
 class Map extends PureComponent {
   constructor(props) {
     super(props);
@@ -60,18 +63,10 @@ class Map extends PureComponent {
     });
   }
 
-  _renderMap() {
+  componentDidMount() {
     this._initMap();
     this._addLayer();
     this._addMarkers();
-  }
-
-  _removeMap() {
-    this._map.remove();
-  }
-
-  componentDidMount() {
-    this._renderMap();
   }
 
   componentDidUpdate(prevProps) {
@@ -81,8 +76,13 @@ class Map extends PureComponent {
     }
 
     if (prevProps.city.name !== this.props.city.name) {
-      this._removeMap();
-      this._renderMap();
+      const {city: {location}} = this.props;
+      const city = [location.latitude, location.longitude];
+      const zoom = location.zoom;
+
+      this._removeMarkers();
+      this._map.setView(city, zoom);
+      this._addMarkers();
     }
   }
 
@@ -113,22 +113,7 @@ Map.defaultProps = {
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        bedrooms: PropTypes.number.isRequired,
-        capacity: PropTypes.number.isRequired,
-        price: PropTypes.number.isRequired,
-        rating: PropTypes.string.isRequired,
-        isPremium: PropTypes.bool.isRequired,
-        isBookmarked: PropTypes.bool.isRequired,
-        features: PropTypes.array.isRequired,
-        imgSrc: PropTypes.string.isRequired,
-        coordinates: PropTypes.arrayOf(
-            PropTypes.number.isRequired
-        ),
-      })
+      PropTypes.object.isRequired
   ).isRequired,
   city: PropTypes.shape({
     name: PropTypes.string.isRequired,

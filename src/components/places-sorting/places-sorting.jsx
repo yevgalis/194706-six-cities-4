@@ -1,6 +1,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
+// TODO :: reset sorting when city changes
+
 class PlacesSorting extends PureComponent {
   constructor(props) {
     super(props);
@@ -25,6 +27,7 @@ class PlacesSorting extends PureComponent {
     const optionValue = evt.target.textContent;
 
     onSortOptionClick(optionValue);
+
     this.setState((prevState) => ({
       isOpened: !prevState.isOpened,
       value: optionValue
