@@ -1,22 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import {formatRating} from '../../utils/common';
 
-const PlaceCard = ({offer, cardType, onCardHover}) => {
-  const {id, title, type, price, rating, is_premium: isPremium, is_favorite: isFavorite, preview_image: previewImage} = offer;
-  const formatRating = () => {
-    const width = Math.round(rating);
-    return `${width * 20}%`;
-  };
-  const ratingWidth = formatRating();
-
-  const onCardMouseEnter = () => {
-    onCardHover(id);
-  };
-
-  const onCardMouseLeave = () => {
-    onCardHover(null);
-  };
+const PlaceCard = ({offer, cardType, onCardHover, onTitleClick}) => {
+  const {
+    id,
+    title,
+    type,
+    price,
+    rating,
+    is_premium: isPremium,
+    is_favorite: isFavorite,
+    preview_image: previewImage
+  } = offer;
+  const ratingWidth = formatRating(rating);
+  const onCardMouseEnter = () => onCardHover(id);
+  const onCardMouseLeave = () => onCardHover(null);
+  const onCardTitleClick = () => onTitleClick(id);
 
   return (
     <article
@@ -55,7 +56,12 @@ const PlaceCard = ({offer, cardType, onCardHover}) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${id}`}>{title}</Link>
+          <Link
+            to={`/offer/${id}`}
+            onClick={onCardTitleClick}
+          >
+            {title}
+          </Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -66,7 +72,8 @@ const PlaceCard = ({offer, cardType, onCardHover}) => {
 PlaceCard.propTypes = {
   offer: PropTypes.object.isRequired,
   cardType: PropTypes.string.isRequired,
-  onCardHover: PropTypes.func.isRequired
+  onCardHover: PropTypes.func.isRequired,
+  onTitleClick: PropTypes.func.isRequired
 };
 
 export default PlaceCard;

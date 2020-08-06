@@ -1,8 +1,8 @@
 import React, {PureComponent, createRef} from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
+import {MapTypes} from '../../utils/const';
 
-// TODO :: check leaflet methods for reseting map
 // TODO :: reduce render count
 
 class Map extends PureComponent {
@@ -75,6 +75,11 @@ class Map extends PureComponent {
       this._addMarkers();
     }
 
+    if (prevProps.offers.length !== this.props.offers.length) {
+      this._removeMarkers();
+      this._addMarkers();
+    }
+
     if (prevProps.city.name !== this.props.city.name) {
       const {city: {location}} = this.props;
       const city = [location.latitude, location.longitude];
@@ -91,7 +96,7 @@ class Map extends PureComponent {
   }
 
   render() {
-    const mapStyle = this.props.type === `cities`
+    const mapStyle = this.props.type === MapTypes.MAIN
       ? {width: `100%`, height: `100%`}
       : {width: `1144px`, height: `100%`, margin: `0 auto`};
 

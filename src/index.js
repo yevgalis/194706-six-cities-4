@@ -5,18 +5,16 @@ import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
 import {composeWithDevTools} from "redux-devtools-extension";
-import {createAPI} from './api';
 import reducer from './reducers/reducer';
 import {AsyncActions as DataAsyncActions} from './reducers/data/data';
 import {ActionCreator} from './reducers/user/user';
+import {createAPI} from './api';
 import App from './components/app/app.jsx';
 
 const onUnauthorized = () => {
   store.dispatch(ActionCreator.requireAuthorization(`NO_AUTH`));
 };
-
 const api = createAPI(onUnauthorized);
-
 const store = createStore(
     reducer,
     composeWithDevTools(

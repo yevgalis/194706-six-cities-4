@@ -1,50 +1,41 @@
 import React, {Fragment, PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getCities} from '../../reducers/data/selectors';
 import {ActionCreator} from '../../reducers/app/app';
-import {getSelectedCity, getCityOffers} from '../../reducers/app/selectors';
+import {getCity, getCitiesList, getCityOffers} from '../../reducers/app/selectors';
 import CitiesList from '../cities-list/cities-list.jsx';
-import PlacesSorting from '../places-sorting/places-sorting.jsx';
+import SortingMenu from '../sorting-menu/sorting-menu.jsx';
 import PlacesList from '../places-list/places-list.jsx';
 import Map from '../map/map.jsx';
 import NoOffers from '../no-offers/no-offers.jsx';
+import {SortingTypes, MapTypes} from '../../utils/const';
+import {sortOffers} from '../../utils/common';
 
 class Main extends PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
+      sortingType: SortingTypes.POPULAR,
       hoveredCard: null
     };
 
     this._cardHoverHandler = this._cardHoverHandler.bind(this);
-    this._sortOffers = this._sortOffers.bind(this);
+    this._sortingOptionsClickHandler = this._sortingOptionsClickHandler.bind(this);
+  }
+
+  _sortingOptionsClickHandler(type) {
+    this.setState({sortingType: type});
   }
 
   _cardHoverHandler(id) {
     this.setState({hoveredCard: id});
   }
 
-  _sortOffers(value) {
-    const {offers} = this.props;
-
-    switch (value) {
-      case `Price: low to high`:
-        offers.sort((a, b) => a.price - b.price);
-        break;
-      case `Price: high to low`:
-        offers.sort((a, b) => b.price - a.price);
-        break;
-      case `Top rated first`:
-        offers.sort((a, b) => b.rating - a.rating);
-        break;
-    }
-  }
-
   render() {
-    const {hoveredCard} = this.state;
-    const {cities, selectedCity, offers, onCityTitleClick} = this.props;
+    const {sortingType, hoveredCard} = this.state;
+    const {cities, city, cityOffers, onCityTitleClick, onOfferTitleClick} = this.props;
+    const sortedOffers = sortOffers(cityOffers, sortingType);
 
     return (
       <Fragment>
@@ -80,29 +71,32 @@ class Main extends PureComponent {
             <h1 className="visually-hidden">Cities</h1>
             <CitiesList
               cities={cities}
-              selectedCity={selectedCity.name}
+              selectedCity={city.name}
               onCityTitleClick={onCityTitleClick}
             />
             {
-              offers.length > 0 &&
+              cityOffers.length > 0 &&
               <div className="cities">
                 <div className="cities__places-container container">
                   <section className="cities__places places">
                     <h2 className="visually-hidden">Places</h2>
-                    <b className="places__found">{offers.length} places to stay in {selectedCity.name}</b>
-                    <PlacesSorting
-                      onSortOptionClick={this._sortOffers}
+                    <b className="places__found">{cityOffers.length} places to stay in {city.name}</b>
+                    <SortingMenu
+                      selectedType={sortingType}
+                      types={Object.values(SortingTypes)}
+                      onSortOptionClick={this._sortingOptionsClickHandler}
                     />
                     <PlacesList
-                      offers={offers}
+                      offers={sortedOffers}
                       onCardHover={this._cardHoverHandler}
+                      onTitleClick={onOfferTitleClick}
                     />
                   </section>
                   <div className="cities__right-section">
                     <Map
-                      type={`cities`}
-                      offers={offers}
-                      city={selectedCity}
+                      type={MapTypes.MAIN}
+                      offers={cityOffers}
+                      city={city}
                       activeCard={hoveredCard}
                     />
                   </div>
@@ -110,8 +104,8 @@ class Main extends PureComponent {
               </div>
             }
             {
-              offers.length === 0 &&
-              <NoOffers city={selectedCity.name} />
+              cityOffers.length === 0 &&
+              <NoOffers city={city.name} />
             }
           </main>
         </div>
@@ -131,7 +125,7 @@ Main.propTypes = {
         }).isRequired
       })
   ).isRequired,
-  selectedCity: PropTypes.shape({
+  city: PropTypes.shape({
     name: PropTypes.string.isRequired,
     location: PropTypes.shape({
       latitude: PropTypes.number.isRequired,
@@ -139,21 +133,25 @@ Main.propTypes = {
       zoom: PropTypes.number.isRequired
     }).isRequired
   }).isRequired,
-  offers: PropTypes.arrayOf(
+  cityOffers: PropTypes.arrayOf(
       PropTypes.object.isRequired
   ).isRequired,
-  onCityTitleClick: PropTypes.func.isRequired
+  onCityTitleClick: PropTypes.func.isRequired,
+  onOfferTitleClick: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  cities: getCities(state),
-  selectedCity: getSelectedCity(state),
-  offers: getCityOffers(state)
+  cities: getCitiesList(state),
+  city: getCity(state),
+  cityOffers: getCityOffers(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onCityTitleClick(city) {
-    dispatch(ActionCreator.changeCity(city));
+    dispatch(ActionCreator.setCity(city));
+  },
+  onOfferTitleClick(id) {
+    dispatch(ActionCreator.setProperty(id));
   }
 });
 

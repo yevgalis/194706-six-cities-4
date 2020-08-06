@@ -1,7 +1,7 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
 import Main from '../main/main.jsx';
-import Property from '../propperty/property.jsx';
+import Property from '../property/property.jsx';
 
 const App = () => {
   return (
