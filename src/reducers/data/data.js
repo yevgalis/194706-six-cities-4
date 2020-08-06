@@ -1,4 +1,5 @@
 import {extend} from '../../utils/common';
+import {ActionCreator as AppActionCreator} from '../app/app';
 
 const initialState = {
   offers: []
@@ -19,7 +20,12 @@ const AsyncActions = {
   loadOffers: () => (dispatch, getState, api) => {
     return api.get(`/hotels`)
       .then((response) => {
-        dispatch(ActionCreator.loadOffers(response.data));
+        const data = response.data;
+        const cities = data.map((obj) => obj.city);
+
+        dispatch(ActionCreator.loadOffers(data));
+        dispatch(AppActionCreator.setCity(data[0].city));
+        dispatch(AppActionCreator.setCitiesList(cities));
       });
   }
 };

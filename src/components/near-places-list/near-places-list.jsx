@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PlaceCard from '../place-card/place-card.jsx';
 
-const NearPlacesList = ({offers}) => {
+const NearPlacesList = ({offers, onTitleClick}) => {
   return (
     <section className="near-places places">
       <h2 className="near-places__title">Other places in the neighbourhood</h2>
@@ -15,6 +15,7 @@ const NearPlacesList = ({offers}) => {
                 offer={offer}
                 cardType={`near-places`}
                 onCardHover={() => {}}
+                onTitleClick={() => onTitleClick(offer.id)}
               />
             );
           })
@@ -27,7 +28,8 @@ const NearPlacesList = ({offers}) => {
 NearPlacesList.propTypes = {
   offers: PropTypes.arrayOf(
       PropTypes.object.isRequired
-  ).isRequired
+  ).isRequired,
+  onTitleClick: PropTypes.func.isRequired
 };
 
 export default NearPlacesList;

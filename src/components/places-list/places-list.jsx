@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PlaceCard from '../place-card/place-card.jsx';
 
-const PlacesList = ({offers, onCardHover}) => {
+const PlacesList = ({offers, onCardHover, onTitleClick}) => {
   return (
     <div className="cities__places-list places__list tabs__content">
       {
@@ -13,6 +13,7 @@ const PlacesList = ({offers, onCardHover}) => {
               offer={offer}
               cardType={`cities`}
               onCardHover={onCardHover}
+              onTitleClick={onTitleClick}
             />
           );
         })
@@ -25,7 +26,8 @@ PlacesList.propTypes = {
   offers: PropTypes.arrayOf(
       PropTypes.object.isRequired
   ).isRequired,
-  onCardHover: PropTypes.func.isRequired
+  onCardHover: PropTypes.func.isRequired,
+  onTitleClick: PropTypes.func.isRequired
 };
 
 export default PlacesList;
